@@ -18,7 +18,7 @@ with:
 With a plain [plugman](https://github.com/apache/cordova-plugman), you should be
 able to install with something like:
 
-    plugman --platform <ios|android> --project <directory> --plugin https://github.com/sampart/cordova-plugin-app-version.git
+    plugman --platform <ios|android> --project <directory> --plugin https://github.com/tgptom/cordova-plugin-app-version.git
 
 ### Manually in iOS
 

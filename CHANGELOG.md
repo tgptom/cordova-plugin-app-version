@@ -1,3 +1,9 @@
+### 0.1.15
+
+* Updated Android `getVersionCode` to use `getLongVersionCode()` on API 28+ (Android 9+), falling back to `versionCode` on earlier APIs, to fix deprecation with modern Android SDKs
+* Removed obsolete `<plugins-plist>` entry from iOS platform block in `plugin.xml`
+* Removed unsupported legacy platforms: `blackberry10`, `windows`, `wp8`
+
 ### 0.1.14
 
 * Fixed browser platform check for config.xml [Issue#128](https://github.com/sampart/cordova-plugin-app-version/issues/128)  
