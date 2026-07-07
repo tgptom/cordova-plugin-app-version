@@ -7,8 +7,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 public class AppVersion extends CordovaPlugin {
   @Override
@@ -32,8 +34,19 @@ public class AppVersion extends CordovaPlugin {
       }
       if (action.equals("getVersionCode")) {
         PackageManager packageManager = this.cordova.getActivity().getPackageManager();
-        callbackContext.success(packageManager.getPackageInfo(this.cordova.getActivity().getPackageName(), 0).versionCode);
-      return true;
+        PackageInfo packageInfo = packageManager.getPackageInfo(this.cordova.getActivity().getPackageName(), 0);
+        long versionCode;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+          versionCode = packageInfo.getLongVersionCode();
+        } else {
+          versionCode = packageInfo.versionCode;
+        }
+        if (versionCode <= Integer.MAX_VALUE) {
+          callbackContext.success((int) versionCode);
+        } else {
+          callbackContext.success(String.valueOf(versionCode));
+        }
+        return true;
       }
       return false;
     } catch (NameNotFoundException e) {
